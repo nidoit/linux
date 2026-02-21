@@ -1,10 +1,11 @@
 #!/bin/bash
-# Google Chrome Dev Installation Script
+# KIME Installation Script
 set -e
 
 # Check if already installed
-if pacman -Qi google-chrome-dev &>/dev/null; then
-    echo "google-chrome-dev is already installed!"
+if pacman -Qi kime-git &>/dev/null; then
+    echo "kime-git is already installed!"
+    echo "Please log out and log back in if you haven't already."
     exit 0
 fi
 
@@ -14,7 +15,7 @@ sudo -v
 while true; do sudo -n true; sleep 50; kill -0 "$$" || exit; done 2>/dev/null &
 SUDO_KEEPER=$!
 
-echo "Installing google-chrome-dev..."
+echo "Installing kime-git..."
 if ! command -v yay &> /dev/null; then
     echo "Installing yay first..."
     BUILDDIR=$(mktemp -d)
@@ -24,6 +25,7 @@ if ! command -v yay &> /dev/null; then
     cd /
     rm -rf "$BUILDDIR"
 fi
-yay -S google-chrome-dev --noconfirm
+yay -S --noconfirm --needed kime-git
 kill $SUDO_KEEPER 2>/dev/null
-echo "google-chrome-dev installed successfully!"
+echo "kime-git installed successfully!"
+echo "Please log out and log back in for changes to take effect."

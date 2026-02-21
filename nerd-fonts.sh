@@ -1,12 +1,6 @@
 #!/bin/bash
-# Google Chrome Dev Installation Script
+# Nerd Fonts Installation Script
 set -e
-
-# Check if already installed
-if pacman -Qi google-chrome-dev &>/dev/null; then
-    echo "google-chrome-dev is already installed!"
-    exit 0
-fi
 
 # Cache sudo credentials upfront (only 1 prompt)
 sudo -v
@@ -14,7 +8,7 @@ sudo -v
 while true; do sudo -n true; sleep 50; kill -0 "$$" || exit; done 2>/dev/null &
 SUDO_KEEPER=$!
 
-echo "Installing google-chrome-dev..."
+echo "Installing Nerd Fonts..."
 if ! command -v yay &> /dev/null; then
     echo "Installing yay first..."
     BUILDDIR=$(mktemp -d)
@@ -24,6 +18,14 @@ if ! command -v yay &> /dev/null; then
     cd /
     rm -rf "$BUILDDIR"
 fi
-yay -S google-chrome-dev --noconfirm
+yay -S --needed --noconfirm \
+  ttf-nerd-fonts-symbols-mono \
+  ttf-roboto \
+  ttf-roboto-mono-nerd \
+  noto-fonts-cjk
 kill $SUDO_KEEPER 2>/dev/null
-echo "google-chrome-dev installed successfully!"
+
+echo "Refreshing font cache..."
+fc-cache -fv
+
+echo "Nerd Fonts installed successfully!"
