@@ -1,10 +1,10 @@
 #!/bin/bash
-# Google Chrome Dev Installation Script
+# Zoom Installation Script
 set -e
 
 # Check if already installed
-if pacman -Qi google-chrome-dev &>/dev/null; then
-    echo "google-chrome-dev is already installed!"
+if pacman -Qi zoom &>/dev/null; then
+    echo "zoom is already installed!"
     exit 0
 fi
 
@@ -14,7 +14,7 @@ sudo -v
 while true; do sudo -n true; sleep 50; kill -0 "$$" || exit; done 2>/dev/null &
 SUDO_KEEPER=$!
 
-echo "Installing google-chrome-dev..."
+echo "Installing zoom..."
 if ! command -v yay &> /dev/null; then
     echo "Installing yay first..."
     BUILDDIR=$(mktemp -d)
@@ -24,6 +24,6 @@ if ! command -v yay &> /dev/null; then
     cd /
     rm -rf "$BUILDDIR"
 fi
-yay -S google-chrome-dev --noconfirm
+yay -S zoom --noconfirm
 kill $SUDO_KEEPER 2>/dev/null
-echo "google-chrome-dev installed successfully!"
+echo "zoom installed successfully!"
